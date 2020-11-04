@@ -5,6 +5,14 @@ import java.util.Objects;
 public class MetricValue {
     private int value;
 
+    private MetricValue(int value) {
+        this.value = value;
+    }
+
+    public static MetricValue of(int value) {
+        return new MetricValue(value);
+    }
+
     public int getValue() {
         return value;
     }

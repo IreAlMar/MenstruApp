@@ -9,18 +9,18 @@ public class MetricRecord {
 
     private UniqueIdentifier recordId;
     private MetricValue metricValue;
-    private Date date; //TODO ValueObject no futuro
+    private RecordDate date;
 
     // avoid calling the constructor from anywhere but this class to avoid miss creation
     // default constructor disappears
-    private MetricRecord(UniqueIdentifier recordId, MetricValue metricValue, Date date) {
+    private MetricRecord(UniqueIdentifier recordId, MetricValue metricValue, RecordDate date) {
         this.recordId = recordId;
         this.metricValue = metricValue;
         this.date = date;
         // Validation logic, generic to the whole object
     }
 
-    public static MetricRecord of(UniqueIdentifier recordId, MetricValue metricValue, Date date) {
+    public static MetricRecord of(UniqueIdentifier recordId, MetricValue metricValue, RecordDate date) {
         // Add validation logic to a specific case
         return new MetricRecord(recordId, metricValue, date);
     }
@@ -33,7 +33,7 @@ public class MetricRecord {
         return metricValue;
     }
 
-    public Date getDate() {
+    public RecordDate getDate() {
         return date;
     }
 
