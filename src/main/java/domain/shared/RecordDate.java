@@ -1,5 +1,6 @@
-package domain.metric;
+package domain.shared;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
@@ -10,8 +11,13 @@ public class RecordDate {
         this.date = date;
     }
 
-    public static RecordDate of(Date date){
-//        check no future date
+    public static RecordDate of(Date date) throws InvalidRecordDateException {
+        Calendar calendar = Calendar.getInstance();
+
+        if (date.after(new Date())){
+            throw new InvalidRecordDateException();
+        }
+
         return new RecordDate(date);
     }
 

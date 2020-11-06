@@ -1,23 +1,26 @@
 package domain.metric;
 
+import domain.shared.RecordDate;
 import domain.shared.UniqueIdentifier;
 
-import java.util.Date;
 import java.util.Objects;
 
 public class MetricRecord {
 
     private UniqueIdentifier recordId;
     private MetricValue metricValue;
-    private RecordDate date;
+    private RecordDate recordDate;
 
-    // avoid calling the constructor from anywhere but this class to avoid miss creation
-    // default constructor disappears
-    private MetricRecord(UniqueIdentifier recordId, MetricValue metricValue, RecordDate date) {
+    // private constructor to avoid calling it from anywhere but this class to avoid object miss
+    // creation -> default constructor disappears
+    private MetricRecord(UniqueIdentifier recordId, MetricValue metricValue, RecordDate recordDate) {
+        if (Objects.isNull(recordId) || Objects.isNull(metricValue) || Objects.isNull(recordDate)) {
+            throw new IllegalArgumentException("Attributes should not be null");
+        }
+
         this.recordId = recordId;
         this.metricValue = metricValue;
-        this.date = date;
-        // Validation logic, generic to the whole object
+        this.recordDate = recordDate;
     }
 
     public static MetricRecord of(UniqueIdentifier recordId, MetricValue metricValue, RecordDate date) {
@@ -33,8 +36,8 @@ public class MetricRecord {
         return metricValue;
     }
 
-    public RecordDate getDate() {
-        return date;
+    public RecordDate getRecordDate() {
+        return recordDate;
     }
 
     @Override
@@ -44,12 +47,12 @@ public class MetricRecord {
         MetricRecord that = (MetricRecord) o;
         return Objects.equals(recordId, that.recordId) &&
                 Objects.equals(metricValue, that.metricValue) &&
-                Objects.equals(date, that.date);
+                Objects.equals(recordDate, that.recordDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(recordId, metricValue, date);
+        return Objects.hash(recordId, metricValue, recordDate);
     }
 
     @Override
@@ -57,7 +60,7 @@ public class MetricRecord {
         return "MetricRecord{" +
                 "recordId=" + recordId +
                 ", metricValue=" + metricValue +
-                ", date=" + date +
+                ", date=" + recordDate +
                 '}';
     }
 }
