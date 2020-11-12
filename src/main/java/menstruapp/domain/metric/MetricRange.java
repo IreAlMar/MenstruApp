@@ -1,8 +1,7 @@
-package domain.metric;
+package menstruapp.domain.metric;
 
 import org.springframework.lang.NonNull;
 
-import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class MetricRange {

@@ -1,8 +1,8 @@
-package domain.metric;
+package menstruapp.domain.metric;
 
-import domain.shared.InvalidRecordDateException;
-import domain.shared.RecordDate;
-import domain.shared.UniqueIdentifier;
+import menstruapp.domain.shared.InvalidRecordDateException;
+import menstruapp.domain.shared.RecordDate;
+import menstruapp.domain.shared.UniqueIdentifier;
 import org.junit.jupiter.api.Test;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;

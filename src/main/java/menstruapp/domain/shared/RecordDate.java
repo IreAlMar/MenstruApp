@@ -1,4 +1,4 @@
-package domain.shared;
+package menstruapp.domain.shared;
 
 import java.util.Calendar;
 import java.util.Date;

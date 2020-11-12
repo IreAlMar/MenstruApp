@@ -1,7 +1,7 @@
-package domain.metric;
+package menstruapp.domain.metric;
 
-import domain.shared.RecordDate;
-import domain.shared.UniqueIdentifier;
+import menstruapp.domain.shared.RecordDate;
+import menstruapp.domain.shared.UniqueIdentifier;
 
 import java.util.Objects;
 

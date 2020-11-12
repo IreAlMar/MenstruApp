@@ -1,4 +1,4 @@
-package domain.shared;
+package menstruapp.domain.shared;
 
 import java.util.Objects;
 import java.util.UUID;

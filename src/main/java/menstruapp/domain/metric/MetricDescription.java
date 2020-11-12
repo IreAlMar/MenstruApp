@@ -1,4 +1,4 @@
-package domain.metric;
+package menstruapp.domain.metric;
 
 public class MetricDescription {
     String metricDescription;

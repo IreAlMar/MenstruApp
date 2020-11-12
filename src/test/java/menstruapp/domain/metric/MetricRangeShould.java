@@ -1,4 +1,4 @@
-package domain.metric;
+package menstruapp.domain.metric;
 
 import org.junit.jupiter.api.Test;
 

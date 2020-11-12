@@ -4,8 +4,8 @@ plugins {
     id 'java'
 }
 
-group 'org.irealmar'
-version '1.0-SNAPSHOT'
+group = 'org.irealmar'
+version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -14,8 +14,8 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 //    runtimeOnly 'com.h2database:h2'
-    testImplementation 'uk.co.jemos.podam:podam:7.2.5.RELEASE'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testImplementation 'uk.co.jemos.podam:podam:7.2.5.RELEASE', 'org.junit' +
+            '.jupiter:junit-jupiter-api:5.3.1', 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 }
 
