@@ -3,24 +3,36 @@ package menstruapp.infraestructure.internal.adapters;
 import menstruapp.application.MaxAndMin;
 import menstruapp.application.MetricService;
 import menstruapp.application.exception.InvalidIdException;
-import menstruapp.domain.metric.Metric;
+import menstruapp.infraestructure.internal.data.MetricEntity;
 import menstruapp.infraestructure.internal.data.MetricRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class MetricServiceImpl implements MetricService {
-    private final MetricRepository metricRepository;
+  private final MetricRepository metricRepository;
 
-    public MetricServiceImpl(MetricRepository metricRepository) {
-        this.metricRepository = metricRepository;
+  public MetricServiceImpl(MetricRepository metricRepository) {
+    this.metricRepository = metricRepository;
+  }
+
+  @Override
+  public MaxAndMin getMetricRange(String id) throws InvalidIdException {
+
+    Optional<MetricEntity> metric = metricRepository.findById(UUID.fromString(id));
+
+    if (metric == null) {
+      throw new InvalidIdException();
     }
 
-    @Override
-    public MaxAndMin getMetricRange(String id) throws InvalidIdException {
-        // TODO UniqueIdentifier.of(request)
-        // TODO remove domain dependencies?
-        Metric metric = metricRepository.getMetric(id);
-
-        return new MaxAndMinImpl(metric.getRange().getMin(), metric.getRange().getMax());
+    try {
+      metric.get();
+    } catch (Exception e) {
+      throw new InvalidIdException();
     }
+
+    return new MaxAndMinImpl(metric.get().getMin(), metric.get().getMax());
+  }
 }
