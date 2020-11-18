@@ -1,7 +1,7 @@
 package menstruapp.infraestructure.internal.adapters;
 
 import menstruapp.application.MaxAndMin;
-import menstruapp.application.MetricService;
+import menstruapp.application.MetricRangeService;
 import menstruapp.application.exception.InvalidIdException;
 import menstruapp.infraestructure.internal.data.MetricEntity;
 import menstruapp.infraestructure.internal.data.MetricRepository;
@@ -11,10 +11,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class MetricServiceImpl implements MetricService {
+public class MetricRangeServiceImpl implements MetricRangeService {
   private final MetricRepository metricRepository;
 
-  public MetricServiceImpl(MetricRepository metricRepository) {
+  public MetricRangeServiceImpl(MetricRepository metricRepository) {
     this.metricRepository = metricRepository;
   }
 
@@ -23,14 +23,8 @@ public class MetricServiceImpl implements MetricService {
 
     Optional<MetricEntity> metric = metricRepository.findById(UUID.fromString(id));
 
-    if (metric == null) {
-      throw new InvalidIdException();
-    }
-
-    try {
-      metric.get();
-    } catch (Exception e) {
-      throw new InvalidIdException();
+   if (!metric.isPresent()){
+       throw new InvalidIdException();
     }
 
     return new MaxAndMinImpl(metric.get().getMin(), metric.get().getMax());

@@ -54,7 +54,7 @@ class MetricRecordShould {
     }
 
     @Test
-    public void throwExceptionWhenCreatingOutOfRangeMetricValueRecordMin() throws InvalidRecordDateException {
+    public void throwExceptionWhenCreatingOutOfRangeMetricValueRecordMin() {
         Metric metric = factory.manufacturePojo(Metric.class);
         Integer outOfRangeValueMin = metric.getRange().getMin() - 1;
 
@@ -64,7 +64,7 @@ class MetricRecordShould {
     }
 
     @Test
-    public void throwExceptionWhenCreatingOutOfRangeMetricValueRecordMax() throws InvalidRecordDateException {
+    public void throwExceptionWhenCreatingOutOfRangeMetricValueRecordMax() {
         Metric metric = factory.manufacturePojo(Metric.class);
         Integer outOfRangeValueMax = metric.getRange().getMax() + 1;
 

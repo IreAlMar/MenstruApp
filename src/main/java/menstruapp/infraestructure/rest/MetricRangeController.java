@@ -1,7 +1,7 @@
 package menstruapp.infraestructure.rest;
 
 import menstruapp.application.MaxAndMin;
-import menstruapp.application.MetricService;
+import menstruapp.application.MetricRangeService;
 import menstruapp.application.exception.InvalidIdException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MetricController {
+public class MetricRangeController {
 
-  @Autowired private MetricService metricService;
+  @Autowired private MetricRangeService metricRangeService;
 
   @GetMapping(value = "/range", params = "id")
   public ResponseEntity getMetricRange(@RequestParam(value = "id") String id) {
     try {
-      MaxAndMin metricRange = metricService.getMetricRange(id);
+      MaxAndMin metricRange = metricRangeService.getMetricRange(id);
       return new ResponseEntity(new ResponseDTO(metricRange), HttpStatus.OK);
     } catch (InvalidIdException e) {
       return new ResponseEntity<>("Invalid id " + id, HttpStatus.BAD_REQUEST);
