@@ -1,5 +1,4 @@
-package menstruapp.application.exception;
-
+package menstruapp.application;
 import menstruapp.application.MetricSpecifics;
 
 public interface SaveMetricService {

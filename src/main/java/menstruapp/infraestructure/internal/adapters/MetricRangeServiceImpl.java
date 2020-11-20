@@ -29,4 +29,7 @@ public class MetricRangeServiceImpl implements MetricRangeService {
 
     return new MaxAndMinImpl(metric.get().getMin(), metric.get().getMax());
   }
+
+    public static class SaveMetricServiceImpl {
+    }
 }

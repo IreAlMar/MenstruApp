@@ -2,8 +2,7 @@ package menstruapp.infraestructure.rest;
 
 import menstruapp.application.MaxAndMin;
 import menstruapp.application.MetricSpecifics;
-import menstruapp.application.exception.SaveMetricService;
-import menstruapp.infraestructure.internal.adapters.MaxAndMinImpl;
+import menstruapp.application.SaveMetricService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

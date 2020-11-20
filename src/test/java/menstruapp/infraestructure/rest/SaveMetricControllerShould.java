@@ -1,6 +1,6 @@
 package menstruapp.infraestructure.rest;
 
-import menstruapp.application.exception.SaveMetricService;
+import menstruapp.application.SaveMetricService;
 import menstruapp.infraestructure.internal.adapters.MetricSpecificsImpl;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -53,9 +53,9 @@ class SaveMetricControllerShould {
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.id", Matchers.equalTo(metricSpecifics.getId())))
         .andExpect(jsonPath("$.description", Matchers.equalTo(metricSpecifics.getDescription())))
-        .andExpect(jsonPath("$.maxAndMin.min",
-                Matchers.equalTo(metricSpecifics.getMaxAndMin().getMin())))
-        .andExpect(jsonPath("$.maxAndMin.max",
-                Matchers.equalTo(metricSpecifics.getMaxAndMin().getMax())));
+        .andExpect(
+            jsonPath("$.maxAndMin.min", Matchers.equalTo(metricSpecifics.getMaxAndMin().getMin())))
+        .andExpect(
+            jsonPath("$.maxAndMin.max", Matchers.equalTo(metricSpecifics.getMaxAndMin().getMax())));
   }
 }
