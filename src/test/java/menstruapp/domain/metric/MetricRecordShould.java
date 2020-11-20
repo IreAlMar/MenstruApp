@@ -72,5 +72,4 @@ class MetricRecordShould {
             metric.addRecord(MetricValue.of(outOfRangeValueMax), RecordDate.of(new Date()));
         });
     }
-
 }
