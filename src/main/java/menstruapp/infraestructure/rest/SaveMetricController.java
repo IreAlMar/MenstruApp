@@ -3,6 +3,7 @@ package menstruapp.infraestructure.rest;
 import menstruapp.application.MaxAndMin;
 import menstruapp.application.MetricSpecifics;
 import menstruapp.application.SaveMetricService;
+import menstruapp.domain.metric.InvalidMetricValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/metrics")
 public class SaveMetricController {
 
-      @Autowired
-      private SaveMetricService service;
+  @Autowired private SaveMetricService service;
 
   @PostMapping
   public ResponseEntity saveNewMetric(@RequestBody RequestDTO requestDTO) {
-    // TODO me he quedado aquí, add tests and control failure cases
-    MetricSpecifics metricSpecifics = service.saveMetric(requestDTO.id, requestDTO.description,
-            requestDTO.min, requestDTO.max);
-    return new ResponseEntity(new ResponseDTO(metricSpecifics), HttpStatus.OK);
+
+    MetricSpecifics metricSpecifics = null;
+    try {
+      metricSpecifics =
+          service.saveMetric(requestDTO.id, requestDTO.description, requestDTO.min, requestDTO.max);
+      return new ResponseEntity(new ResponseDTO(metricSpecifics), HttpStatus.OK);
+    } catch (InvalidMetricValueException e) {
+      return new ResponseEntity("Invalid parameter", HttpStatus.BAD_REQUEST);
+    }
   }
 
   private class ResponseDTO {

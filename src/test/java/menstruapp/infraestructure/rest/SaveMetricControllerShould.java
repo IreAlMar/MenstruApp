@@ -1,6 +1,7 @@
 package menstruapp.infraestructure.rest;
 
 import menstruapp.application.SaveMetricService;
+import menstruapp.domain.metric.InvalidMetricValueException;
 import menstruapp.infraestructure.internal.adapters.MetricSpecificsImpl;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -31,9 +33,16 @@ class SaveMetricControllerShould {
   @MockBean private SaveMetricService service;
   PodamFactory factory = new PodamFactoryImpl();
   MetricSpecificsImpl metricSpecifics = factory.manufacturePojo(MetricSpecificsImpl.class);
+  String content =
+      "{\"id\": \""
+          + metricSpecifics.getId()
+          + "\", \"description\": \""
+          + metricSpecifics.getDescription()
+          + "\", \"min\":0"
+          + ", \"max\":10}";
 
   @Test
-  public void saveMetric() throws Exception {
+  public void saveMetric() throws Exception, InvalidMetricValueException {
     Mockito.when(service.saveMetric(anyString(), anyString(), anyInt(), anyInt()))
         .thenReturn(metricSpecifics);
     // TODO maxAndMin is null because of Podam -> MaxAndMinImpl in MetricSpecificsImpl
@@ -41,13 +50,7 @@ class SaveMetricControllerShould {
     mvc.perform(
             MockMvcRequestBuilders.post(METRICS_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(
-                    "{\"id\": \""
-                        + metricSpecifics.getId()
-                        + "\", \"description\": \""
-                        + metricSpecifics.getDescription()
-                        + "\", \"min\":0"
-                        + ", \"max\":10}")
+                .content(content)
                 .accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -57,5 +60,21 @@ class SaveMetricControllerShould {
             jsonPath("$.maxAndMin.min", Matchers.equalTo(metricSpecifics.getMaxAndMin().getMin())))
         .andExpect(
             jsonPath("$.maxAndMin.max", Matchers.equalTo(metricSpecifics.getMaxAndMin().getMax())));
+  }
+
+  @Test
+  public void throwErrorMessageGivenInvalidParameters()
+      throws Exception, InvalidMetricValueException {
+
+    Mockito.when(service.saveMetric(anyString(), anyString(), anyInt(), anyInt()))
+        .thenThrow(new InvalidMetricValueException());
+
+    mvc.perform(
+            MockMvcRequestBuilders.post(METRICS_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content)
+                .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isBadRequest())
+        .andExpect(content().string(equalTo("Invalid parameter")));
   }
 }

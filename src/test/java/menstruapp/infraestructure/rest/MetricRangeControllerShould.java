@@ -52,7 +52,7 @@ class MetricRangeControllerShould {
   }
 
   @Test
-  public void throwExceptionGivenAnInvalidId() throws InvalidIdException, Exception {
+  public void throwErrorMessageGivenAnInvalidId() throws InvalidIdException, Exception {
     Mockito.when(metricRangeService.getMetricRange(anyString())).thenThrow(new InvalidIdException());
 
     mvc.perform(
