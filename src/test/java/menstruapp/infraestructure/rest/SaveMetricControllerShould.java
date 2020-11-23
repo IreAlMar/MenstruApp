@@ -67,7 +67,7 @@ class SaveMetricControllerShould {
       throws Exception, InvalidMetricValueException {
 
     Mockito.when(service.saveMetric(anyString(), anyString(), anyInt(), anyInt()))
-        .thenThrow(new InvalidMetricValueException());
+        .thenThrow(new IllegalArgumentException());
 
     mvc.perform(
             MockMvcRequestBuilders.post(METRICS_URL)

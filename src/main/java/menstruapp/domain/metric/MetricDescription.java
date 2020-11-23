@@ -1,7 +1,7 @@
 package menstruapp.domain.metric;
 
 public class MetricDescription {
-    String metricDescription;
+    private final String metricDescription;
     
     public MetricDescription(String metricDescription) {
         validate(metricDescription);
@@ -9,5 +9,14 @@ public class MetricDescription {
     }
 
     private void validate(String metricDescription) {
+    }
+
+    public String getMetricDescription() {
+        return metricDescription;
+    }
+
+    @Override
+    public String toString() {
+        return metricDescription;
     }
 }

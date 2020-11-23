@@ -21,12 +21,11 @@ public class SaveMetricController {
   @PostMapping
   public ResponseEntity saveNewMetric(@RequestBody RequestDTO requestDTO) {
 
-    MetricSpecifics metricSpecifics = null;
     try {
-      metricSpecifics =
+      MetricSpecifics metricSpecifics =
           service.saveMetric(requestDTO.id, requestDTO.description, requestDTO.min, requestDTO.max);
       return new ResponseEntity(new ResponseDTO(metricSpecifics), HttpStatus.OK);
-    } catch (InvalidMetricValueException e) {
+    } catch (IllegalArgumentException e) {
       return new ResponseEntity("Invalid parameter", HttpStatus.BAD_REQUEST);
     }
   }

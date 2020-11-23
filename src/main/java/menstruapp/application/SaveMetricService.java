@@ -1,7 +1,6 @@
 package menstruapp.application;
-import menstruapp.application.MetricSpecifics;
-import menstruapp.domain.metric.InvalidMetricValueException;
 
+//TODO IllegalArgumentException or custom exception?
 public interface SaveMetricService {
-    MetricSpecifics saveMetric(String id, String description, Integer min, Integer max) throws InvalidMetricValueException;
+    MetricSpecifics saveMetric(String id, String description, Integer min, Integer max) throws IllegalArgumentException;
 }

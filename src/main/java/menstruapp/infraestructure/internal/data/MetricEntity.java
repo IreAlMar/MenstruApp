@@ -1,13 +1,13 @@
 package menstruapp.infraestructure.internal.data;
 
+import menstruapp.domain.metric.Metric;
 import org.springframework.data.annotation.Id;
 
 import java.util.UUID;
 
 public class MetricEntity {
 
-  @Id
-  private UUID id;
+  @Id private UUID id;
   private String description;
   private Integer min;
   private Integer max;
@@ -18,6 +18,14 @@ public class MetricEntity {
     this.description = description;
     this.min = min;
     this.max = max;
+  }
+
+  public static MetricEntity of(Metric metric) {
+    return new MetricEntity(
+        metric.getId().getId(),
+        metric.getDescription().getMetricDescription(),
+        metric.getRange().getMin(),
+        metric.getRange().getMax());
   }
 
   public UUID getId() {
