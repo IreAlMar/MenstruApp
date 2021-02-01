@@ -3,7 +3,6 @@ package menstruapp.infraestructure.rest;
 import menstruapp.application.MaxAndMin;
 import menstruapp.application.MetricSpecifics;
 import menstruapp.application.SaveMetricService;
-import menstruapp.domain.metric.InvalidMetricValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,7 @@ public class SaveMetricController {
     try {
       MetricSpecifics metricSpecifics =
           service.saveMetric(requestDTO.id, requestDTO.description, requestDTO.min, requestDTO.max);
-      return new ResponseEntity(new ResponseDTO(metricSpecifics), HttpStatus.OK);
+      return new ResponseEntity(new ResponseDTO(metricSpecifics), HttpStatus.CREATED);
     } catch (IllegalArgumentException e) {
       return new ResponseEntity("Invalid parameter", HttpStatus.BAD_REQUEST);
     }

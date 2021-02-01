@@ -52,7 +52,7 @@ class SaveMetricControllerShould {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content)
                 .accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk())
+        .andExpect(status().isCreated())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.id", Matchers.equalTo(metricSpecifics.getId())))
         .andExpect(jsonPath("$.description", Matchers.equalTo(metricSpecifics.getDescription())))
