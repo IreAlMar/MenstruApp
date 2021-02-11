@@ -1,5 +1,6 @@
 package menstruapp.application.registermenstruation;
 
+import menstruapp.application.ValidationException;
 import menstruapp.domain.framework.Handler;
 import menstruapp.domain.menstruation.MenstruationRegistries;
 import menstruapp.domain.menstruation.MenstruationRegistry;
@@ -18,14 +19,18 @@ public class RegisterMenstruationHandler implements Handler<Void, RegisterMenstr
   }
 
   @Override
-  public Void handle(RegisterMenstruationCommand command) {
+  public Void handle(RegisterMenstruationCommand command) throws ValidationException {
     try {
       MenstruationRegistry registry =
           menstruationRegistries.addRegistry(command.getType(), command.getDate());
       persistenceService.add(command.getUuid(), registry);
 
-    } catch (MenstruationRegistries.ExistingRegistryException | MenstruationRegistries.InvalidRegistryDateException e) {
-      e.printStackTrace();
+    } catch (MenstruationRegistries.ExistingRegistryException e) {
+      // TODO: Log a warning message and test it is logged
+    } catch (MenstruationRegistries.InvalidRegistryDateException e) {
+      throw ValidationException.of(e);
+    } catch (MenstruationRegistries.InvalidRegistryTypeException e) {
+      throw ValidationException.of(e);
     }
 
     return null;

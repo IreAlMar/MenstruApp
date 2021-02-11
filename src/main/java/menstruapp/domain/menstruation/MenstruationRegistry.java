@@ -3,7 +3,7 @@ package menstruapp.domain.menstruation;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class MenstruationRegistry {
+public class MenstruationRegistry implements Comparable<MenstruationRegistry>{
     private final RegistryMenstruationType type;
     private final LocalDate date;
 
@@ -30,6 +30,11 @@ public class MenstruationRegistry {
     @Override
     public int hashCode() {
         return Objects.hash(type, date);
+    }
+
+    @Override
+    public int compareTo(MenstruationRegistry o) {
+        return this.getDate().compareTo(o.getDate());
     }
 
     public RegistryMenstruationType getType() {
