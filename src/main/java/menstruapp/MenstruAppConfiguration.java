@@ -1,4 +1,4 @@
-package menstruapp.infraestructure;
+package menstruapp;
 
 import menstruapp.domain.menstruation.MenstruationRegistries;
 import org.springframework.context.annotation.Bean;
@@ -11,4 +11,6 @@ public class MenstruAppConfiguration {
         // TODO in the future: read from DB to load valid registries
         return MenstruationRegistries.of();
     }
+
+
 }
