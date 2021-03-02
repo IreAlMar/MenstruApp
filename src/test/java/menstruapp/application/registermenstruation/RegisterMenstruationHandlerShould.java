@@ -107,7 +107,7 @@ class RegisterMenstruationHandlerShould {
 
     ValidationException thrownException =
         assertThrows(ValidationException.class, () -> handler.handle(command));
-    assertEquals(thrownException.getMessage(), "Registry date validation error");
+    assertEquals(thrownException.getMessage(), "Registry date validation error.");
   }
 
   @Test
@@ -124,6 +124,6 @@ class RegisterMenstruationHandlerShould {
 
     ValidationException thrownException =
         assertThrows(ValidationException.class, () -> handler.handle(command));
-    assertEquals(thrownException.getMessage(), "Registry type validation error");
+    assertEquals(thrownException.getMessage(), "Registry type validation error.");
   }
 }

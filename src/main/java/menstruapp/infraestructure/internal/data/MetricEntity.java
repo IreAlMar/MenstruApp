@@ -1,10 +1,12 @@
 package menstruapp.infraestructure.internal.data;
 
 import menstruapp.domain.metric.Metric;
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.UUID;
 
+@Entity
 public class MetricEntity {
 
   @Id private UUID id;
@@ -12,6 +14,8 @@ public class MetricEntity {
   private Integer min;
   private Integer max;
   // another entity : private List<MetricRecord> records;
+
+  public MetricEntity() {}
 
   public MetricEntity(UUID id, String description, Integer min, Integer max) {
     this.id = id;

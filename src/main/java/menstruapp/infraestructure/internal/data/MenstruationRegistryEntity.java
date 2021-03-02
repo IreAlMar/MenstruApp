@@ -1,15 +1,19 @@
 package menstruapp.infraestructure.internal.data;
 
 import menstruapp.domain.menstruation.RegistryMenstruationType;
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.UUID;
 
+@Entity
 public class MenstruationRegistryEntity {
   @Id private UUID id;
   private RegistryMenstruationType type;
   private LocalDate date;
+
+  public MenstruationRegistryEntity() {}
 
   public MenstruationRegistryEntity(UUID id, RegistryMenstruationType type, LocalDate date) {
     this.id = id;

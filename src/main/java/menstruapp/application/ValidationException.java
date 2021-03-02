@@ -10,10 +10,14 @@ public class ValidationException extends Throwable {
   }
 
   public static ValidationException of(MenstruationRegistries.InvalidRegistryDateException e) {
-    return new ValidationException("Registry date validation error");
+    return new ValidationException("Registry date validation error.");
   }
 
   public static ValidationException of(MenstruationRegistries.InvalidRegistryTypeException e) {
-    return new ValidationException("Registry type validation error");
+    return new ValidationException("Registry type validation error.");
+  }
+
+  public static ValidationException of() {
+    return new ValidationException("Validation error.");
   }
 }

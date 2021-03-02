@@ -24,6 +24,8 @@ public class MenstruationRegistries {
       throws ExistingRegistryException, InvalidRegistryDateException, InvalidRegistryTypeException {
     MenstruationRegistry registry = MenstruationRegistry.of(type, date);
 
+    //In the future, call here the service that provides the data from the database
+
     // No future dates are added
     if (date.isAfter(LocalDate.now())) {
       throw new InvalidRegistryDateException();

@@ -19,3 +19,8 @@ Infrastructure Rest:
 
 Integration testing:
  * test DB to verify the calls to the database are ok
+
+## TODO
+
+* ** Create RetrieveMenstruationRegistries use case
+* Aim: 100% domain test coverage
