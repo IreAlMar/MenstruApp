@@ -1,6 +1,6 @@
 package menstruapp.application.registermenstruation;
 
-import menstruapp.application.ValidationException;
+import menstruapp.application.exception.ValidationException;
 import menstruapp.domain.menstruation.MenstruationRegistries;
 import menstruapp.domain.menstruation.RegistryMenstruationType;
 import menstruapp.infraestructure.internal.adapters.RegisterMenstruationPersistenceServiceImpl;

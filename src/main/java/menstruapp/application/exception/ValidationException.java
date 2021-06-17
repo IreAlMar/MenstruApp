@@ -1,4 +1,4 @@
-package menstruapp.application;
+package menstruapp.application.exception;
 
 import menstruapp.domain.menstruation.MenstruationRegistries;
 

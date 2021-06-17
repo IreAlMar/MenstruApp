@@ -1,6 +1,6 @@
 package menstruapp.infraestructure.rest;
 
-import menstruapp.application.ValidationException;
+import menstruapp.application.exception.ValidationException;
 import menstruapp.application.registermenstruation.RegisterMenstruationCommand;
 import menstruapp.application.registermenstruation.RegisterMenstruationHandler;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,9 +45,6 @@ class MenstruationControllerShould {
           + registerMenstruationCommand.getDate()
           + "\"}";
 
-  //TODO Handler is already tested, mock the handler and verify that the handler is called and
-  // the command is correctly sent, what arrives as json is correctly transformed in a command
-  // object
   @Test
   public void receiveDataToSaveAMenstruationRegistry() throws Exception, ValidationException {
     Mockito.doNothing().when(registerMenstruationHandlerMock).handle(any());
