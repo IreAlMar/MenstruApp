@@ -6,6 +6,8 @@ import menstruapp.domain.menstruation.MenstruationRegistries;
 import menstruapp.domain.menstruation.MenstruationRegistry;
 import org.springframework.stereotype.Component;
 
+import java.util.TreeSet;
+
 @Component
 public class RegisterMenstruationHandler implements Handler<Void, RegisterMenstruationCommand> {
   private final MenstruationRegistries menstruationRegistries;
@@ -19,7 +21,7 @@ public class RegisterMenstruationHandler implements Handler<Void, RegisterMenstr
   }
 
   @Override
-  public Void handle(RegisterMenstruationCommand command) throws ValidationException {
+  public TreeSet<MenstruationRegistry> handle(RegisterMenstruationCommand command) throws ValidationException {
     try {
       MenstruationRegistry registry =
           menstruationRegistries.addRegistry(command.getType(), command.getDate());

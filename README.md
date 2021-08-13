@@ -24,3 +24,4 @@ Integration testing:
 
 * ** Create RetrieveMenstruationRegistries use case
 * Aim: 100% domain test coverage
+* Query -> retrieve menstruation registries
