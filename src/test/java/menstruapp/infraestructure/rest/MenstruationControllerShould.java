@@ -3,6 +3,7 @@ package menstruapp.infraestructure.rest;
 import menstruapp.application.exception.ValidationException;
 import menstruapp.application.registermenstruation.RegisterMenstruationCommand;
 import menstruapp.application.registermenstruation.RegisterMenstruationHandler;
+import menstruapp.domain.menstruation.MenstruationRegistry;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -17,6 +18,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
+
+import java.util.TreeSet;
 
 import static menstruapp.infraestructure.rest.Menstruation.MenstruationController.MENSTRUATION_REGISTRY_URL;
 import static org.hamcrest.Matchers.equalTo;
@@ -44,10 +47,14 @@ class MenstruationControllerShould {
           + "\", \"date\": \""
           + registerMenstruationCommand.getDate()
           + "\"}";
+  MenstruationRegistry registry1 = factory.manufacturePojo(MenstruationRegistry.class);
+  MenstruationRegistry registry2 = factory.manufacturePojo(MenstruationRegistry.class);
+  TreeSet<MenstruationRegistry> registries = new TreeSet<>();
+
 
   @Test
   public void receiveDataToSaveAMenstruationRegistry() throws Exception, ValidationException {
-    Mockito.doNothing().when(registerMenstruationHandlerMock).handle(any());
+     Mockito.doReturn(registries).when(registerMenstruationHandlerMock).handle(any());
 
     mockMvc
         .perform(
