@@ -12,10 +12,8 @@
 Domain -> 100% test
 
 Application:
- * handlers: mock external services
 
 Infrastructure Rest:
- * verify the commands are correctly created
 
 Integration testing:
  * test DB to verify the calls to the database are ok
